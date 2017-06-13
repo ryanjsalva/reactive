@@ -5,28 +5,44 @@
  */
 
 import React, { Component } from 'react';
+import CodePush from 'react-native-code-push';
+import Analytics from 'mobile-center-analytics';
+
+
 import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  Button
 } from 'react-native';
 
 export default class reactive extends Component {
+
+  // method to handle button press and pull a terrible joke!
+  state = { joke: '...' }
+  handlePress(e) {
+   this.setState({joke: '...'})
+   this.trackEvent() // I won't pretend that was an accident ;-)
+   fetch('https://icanhazdadjoke.com/', { headers: { Accept: 'text/plain' } }).then(r => r.text())
+     .then(joke => this.setState({ joke }));
+  }
+
+  // record user engagement, analytics
+  trackEvent() {
+    Analytics.trackEvent('joke', {'punchline': this.state.joke});
+  }
+
+  // render the component
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to React Native!
+          {this.state.joke}
         </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
-        </Text>
+        <Button title='I am not laughing' onPress={() => this.handlePress()} />
       </View>
+
     );
   }
 }
@@ -50,4 +66,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('reactive', () => reactive);
+AppRegistry.registerComponent('reactive', () => CodePush( {installMode: CodePush.InstallMode.IMMEDIATE, updateDialog: true } ) (reactive));
