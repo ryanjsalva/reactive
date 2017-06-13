@@ -23,7 +23,7 @@ export default class reactive extends Component {
   state = { joke: '...' }
   handlePress(e) {
    this.setState({joke: '...'})
-   trackEvent() // let's actually call the analytics event :-)
+   this.trackEvent() // I won't pretend that was an accident ;-)
    fetch('https://icanhazdadjoke.com/', { headers: { Accept: 'text/plain' } }).then(r => r.text())
      .then(joke => this.setState({ joke }));
   }
@@ -66,4 +66,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('reactive', () => reactive);
+AppRegistry.registerComponent('reactive', () => CodePush( {installMode: CodePush.InstallMode.IMMEDIATE, updateDialog: true } ) (reactive));
