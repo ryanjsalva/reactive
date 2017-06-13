@@ -30,7 +30,7 @@ export default class reactive extends Component {
 
   // record user engagement, analytics
   trackEvent() {
-    Analytics.trackEvent('foobar', {'horse': 'brown'});
+    Analytics.trackEvent('joke', {'punchline': this.state.joke});
   }
 
   // render the component
