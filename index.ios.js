@@ -5,6 +5,10 @@
  */
 
 import React, { Component } from 'react';
+import CodePush from 'react-native-code-push';
+import Analytics from 'mobile-center-analytics';
+
+
 import {
   AppRegistry,
   StyleSheet,
@@ -19,6 +23,7 @@ export default class reactive extends Component {
   state = { joke: '...' }
   handlePress(e) {
    this.setState({joke: '...'})
+   trackEvent() // let's actually call the analytics event :-)
    fetch('https://icanhazdadjoke.com/', { headers: { Accept: 'text/plain' } }).then(r => r.text())
      .then(joke => this.setState({ joke }));
   }

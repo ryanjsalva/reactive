@@ -7,8 +7,11 @@
 		"test": "jest"
 	},
 	"dependencies": {
+		"mobile-center-analytics": "^0.4.0",
+		"mobile-center-crashes": "^0.4.0",
 		"react": "16.0.0-alpha.12",
-		"react-native": "0.45.1"
+		"react-native": "0.45.1",
+		"react-native-code-push": "^2.1.0-beta"
 	},
 	"devDependencies": {
 		"babel-jest": "20.0.3",
